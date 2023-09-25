@@ -1,0 +1,35 @@
+GET http://127.0.0.1:3000/tasks/
+
+###
+
+GET http://127.0.0.1:3000/tasks/65107f87191b6cea8e05d426
+
+###
+
+POST http://127.0.0.1:3000/tasks/
+Content-Type: application/json
+
+{
+    "name": "Tarea",
+    "discription": "Realizar la siguiente tarea",
+    "status": "Pendiente"
+    
+}
+
+###
+
+DELETE http://127.0.0.1:3000/tasks/65107f87191b6cea8e05d426
+
+###
+
+PATCH http://127.0.0.1:3000/tasks/651083dc7d80b18a8fffd69e
+Content-Type: application/json
+
+{
+    "name": "Nueva tarea",
+    "discription": "Tarea actualizada",
+    "status": "Realizada"
+}
+
+###
+GET http://127.0.0.1:3000/tasks/status
