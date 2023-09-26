@@ -1,28 +1,32 @@
-GET http://127.0.0.1:3000/tasks/
+GET http://localhost:3000/tasks/
+
+###
+GET http://127.0.0.1:3000/tasks/status/Pendiente
+
 
 ###
 
-GET http://127.0.0.1:3000/tasks/65107f87191b6cea8e05d426
+GET http://localhost:3000/tasks/65122064666491b2da4bf618
 
 ###
 
-POST http://127.0.0.1:3000/tasks/
+POST http://localhost:3000/tasks/
 Content-Type: application/json
 
 {
     "name": "Tarea",
-    "discription": "Realizar la siguiente tarea",
+    "description": "Realizar la siguiente tarea",
     "status": "Pendiente"
     
 }
 
 ###
 
-DELETE http://127.0.0.1:3000/tasks/65107f87191b6cea8e05d426
+DELETE http://127.0.0.1:3000/tasks/651220fbe74433685d38bd51
 
 ###
 
-PATCH http://127.0.0.1:3000/tasks/651083dc7d80b18a8fffd69e
+PATCH http://localhost:3000/tasks/65122064666491b2da4bf618
 Content-Type: application/json
 
 {
@@ -31,5 +35,4 @@ Content-Type: application/json
     "status": "Realizada"
 }
 
-###
-GET http://127.0.0.1:3000/tasks/status
+

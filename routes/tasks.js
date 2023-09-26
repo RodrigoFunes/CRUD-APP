@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const Task = require("../models/task");
+const taskSchema = require("../models/task");
 
 // Getting all tasks
 router.get("/", async (req, res) => {
   try {
-    const tasks = await Task.find();
+    const tasks = await taskSchema.find();
     res.json(tasks);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -17,11 +17,11 @@ router.get("/:id", getTask, (req, res) => {
   res.json(res.task);
 });
 
-// Creating task
+//Creating task
 router.post("/", async (req, res) => {
-  const task = new Task({
+  const task = new taskSchema({
     name: req.body.name,
-    discription: req.body.discription,
+    description: req.body.description,
     status: req.body.status,
   });
   try {
@@ -37,8 +37,8 @@ router.patch("/:id", getTask, async (req, res) => {
   if (req.body.name != null) {
     res.task.name = req.body.name;
   }
-  if (req.body.discription != null) {
-    res.task.discription = req.body.discription;
+  if (req.body.description != null) {
+    res.task.description = req.body.description;
   }
   if (req.body.status != null) {
     res.task.status = req.body.status;
@@ -62,10 +62,18 @@ router.delete("/:id", getTask, async (req, res) => {
 });
 
 // Pending tasks
-router.get("/status", async (req, res) => {
+router.get("/status/Pendiente", async (req, res) => {
   try {
-    const tasksPendientes = await Task.find({ status: "Pendiente" });
-    res.json(tasksPendientes);
+    const resultado = [];
+    const tasksPendientes = await taskSchema.find();
+    for (let i = 0; i < tasksPendientes.lenght; i++) {
+      if (taskPendientes[i].status == "Pendiente") {
+        resultado.push({ ...taskPendientes[i] });
+        i++;
+      }
+    }
+
+    res.json(resultado);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -77,7 +85,7 @@ router.get("/status", async (req, res) => {
 async function getTask(req, res, next) {
   let task;
   try {
-    task = await Task.findById(req.params.id);
+    task = await taskSchema.findById(req.params.id);
     if (task == null) {
       return res.status(404).json({ message: "No se pudo encontrar tarea" });
     }
