@@ -62,24 +62,45 @@ router.delete("/:id", getTask, async (req, res) => {
 });
 
 // Pending tasks
-router.get("/status/Pendiente", async (req, res) => {
+router.get("/status/Pending", async (req, res) => {
   try {
-    const resultado = [];
-    const tasksPendientes = await taskSchema.find();
-    for (let i = 0; i < tasksPendientes.lenght; i++) {
-      if (taskPendientes[i].status == "Pendiente") {
-        resultado.push({ ...taskPendientes[i] });
-        i++;
-      }
+    const result = [];
+    const task = await taskSchema.find();
+    if (!task) {
+      res.send("No hay tareas");
+    } else {
+      const pending = task.filter((x) => x.status === "Pendiente");
+      result.push(pending);
     }
-
-    res.json(resultado);
+    res.json(result);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
 
 // Transcurred days
+
+router.get("/:id/dias-transcurridos", async (req, res) => {
+  try {
+    const taskId = req.params.id;
+
+    const task = await taskSchema.findById(taskId);
+
+    if (!task) {
+      return res.status(404).json({ message: "No se encontró la tarea" });
+    }
+
+    const currentDate = new Date();
+    const creationDate = task.date;
+    const timeDiff = Math.abs(currentDate - creationDate);
+    const transcurredDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+    res.json({ transcurredDays });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: err.message });
+  }
+});
 
 ////
 async function getTask(req, res, next) {

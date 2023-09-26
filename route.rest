@@ -1,14 +1,15 @@
+### Get all tasks
 GET http://localhost:3000/tasks/
 
-###
-GET http://127.0.0.1:3000/tasks/status/Pendiente
+### Get pending tasks
+GET http://127.0.0.1:3000/tasks/status/Pending
 
 
-###
+### Get for ID
 
-GET http://localhost:3000/tasks/65122064666491b2da4bf618
+GET http://localhost:3000/tasks/65131ddd46151df751bbc070
 
-###
+### Create task
 
 POST http://localhost:3000/tasks/
 Content-Type: application/json
@@ -20,11 +21,11 @@ Content-Type: application/json
     
 }
 
-###
+### Deleting task
 
-DELETE http://127.0.0.1:3000/tasks/651220fbe74433685d38bd51
+DELETE http://127.0.0.1:3000/tasks/651339f171049ba09423e9d0
 
-###
+### Updating task
 
 PATCH http://localhost:3000/tasks/65122064666491b2da4bf618
 Content-Type: application/json
@@ -35,4 +36,7 @@ Content-Type: application/json
     "status": "Realizada"
 }
 
+### Transcurred days
+
+GET http://localhost:3000/tasks/65131ddd46151df751bbc070/dias-transcurridos/
 
